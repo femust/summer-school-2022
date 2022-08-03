@@ -193,7 +193,7 @@ class TrajectoryUtils():
             for i in range(1, len(subtraj) - 1):
                 subtraj_0 = subtraj[i - 1].point
                 subtraj_1 = subtraj[i].point
-                
+
                 dist = distEuclidean(subtraj_0, subtraj_1)
                 hdg_change = d_hdg * (dist / subtraj_len)
 
@@ -448,16 +448,16 @@ class TrajectoryUtils():
             traj_hdg_interp = self.interpolateHeading(waypoints)
             # Parametrize trajectory
             toppra_trajectory = self.getParametrizedTrajectory(traj_hdg_interp, velocity_limits, acceleration_limits)
-
-            sampling_step = trajectory.dT
+            sampling_steps = np.arange(0, toppra_trajectory.duration, trajectory.dT) #np.linspace(0, toppra_trajectory.duration, len(waypoints))
 
             # STUDENTS TODO: Sample the path parametrization 'toppra_trajectory' (instance of TOPPRA library).
-            raise NotImplementedError('[STUDENTS TODO] Trajectory sampling not finished. You have to implement it on your own.')
+            # raise NotImplementedError('[STUDENTS TODO] Trajectory sampling not finished. You have to implement it on your own.')
             # Tips:
             #  - check documentation for TOPPRA (look for eval() function): https://hungpham2511.github.io/toppra/index.html
             #  - use 'toppra_trajectory' and the predefined sampling step 'sampling_step'
 
-            samples = [] # [STUDENTS TODO] Fill this variable with trajectory samples
+            samples = toppra_trajectory(sampling_steps)
+
 
             # Convert to Trajectory class
             poses      = [Pose(q[0], q[1], q[2], q[3]) for q in samples]
