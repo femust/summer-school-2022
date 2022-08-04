@@ -100,6 +100,7 @@ class TSPSolver3D():
 
         # find path between each pair of goals (a, b)
         for a in range(n):
+            g1 = viewpoints[a].pose
             for b in range(n):
                 if a == b:
                     continue
@@ -110,7 +111,6 @@ class TSPSolver3D():
                 #   - Think if you can limit the number of computations or decide which distance-estimating method use for each point-pair.
 
                 # get poses of the viewpoints
-                g1 = viewpoints[a].pose
                 g2 = viewpoints[b].pose
 
                 # estimate distances between the viewpoints
