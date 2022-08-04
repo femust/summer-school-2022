@@ -144,9 +144,11 @@ class RRT:
             #  - to prevent deadlocks when sampling continuously, increase the sampling space by inflating the standard deviation of the gaussian sampling
 
             # STUDENTS TODO: Sample XYZ in the state space
-            point_xyz  = np.random.normal(mean, sigma)
-
-            point = Point(*point_xyz)
+            point_x  = np.random.normal(mean[0], sigma[0] + sigma_offset)
+            point_y  = np.random.normal(mean[1], sigma[1] + sigma_offset)
+            point_z  = np.random.normal(mean[2], sigma[2] + sigma_offset)
+            
+            point = Point(point_x, point_y, point_z)
             point_valid = self.pointValid(point)
 
         return point.asTuple()
@@ -249,7 +251,6 @@ class RRT:
         rrt_gaussian_sigma_inflation = 0.0
 
         while not self.tree.valid:
-
             point         = self.getRandomPoint() if not self.gaussian_sampling else self.getRandomPointGaussian(rrt_gaussian_sigma_inflation)
             closest_point = self.getClosestPoint(point)
            
@@ -257,7 +258,6 @@ class RRT:
             point = self.setDistance(closest_point, point, branch_size)
 
             if self.validateLinePath(point, closest_point):
-
                 if not rrtstar:
                     parent, cost = closest_point, distEuclidean(point, closest_point)
                 else:
