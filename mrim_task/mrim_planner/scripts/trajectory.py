@@ -197,12 +197,12 @@ class TrajectoryUtils():
                 dist = distEuclidean(subtraj_0, subtraj_1)
                 hdg_change = d_hdg * (dist / subtraj_len)
 
-                # [STUDENTS TODO, COMPULSORY] Implement heading interpolation here
+                # [STUDENTS DONE, COMPULSORY] Implement heading interpolation here
                 # Tips:
                 #  - interpolate the heading linearly (create a function of distance between two points of the subpath)
                 #  - do not forget to wrap angle to <-pi, pi) (see/use wrapAngle() in utils.py)
 
-                # [STUDENTS TODO] Change variable 'hdg_interp', nothing else
+                # [STUDENTS DONE] Change variable 'hdg_interp', nothing else
                 # wrapAngle(hdg_change) # waypoints[0].heading
                 hdg_interp = wrapAngle(hdg_change + hdg_from)
 
@@ -450,8 +450,8 @@ class TrajectoryUtils():
             toppra_trajectory = self.getParametrizedTrajectory(traj_hdg_interp, velocity_limits, acceleration_limits)
             sampling_steps = np.arange(0, toppra_trajectory.duration, trajectory.dT) #np.linspace(0, toppra_trajectory.duration, len(waypoints))
 
-            # STUDENTS TODO: Sample the path parametrization 'toppra_trajectory' (instance of TOPPRA library).
-            # raise NotImplementedError('[STUDENTS TODO] Trajectory sampling not finished. You have to implement it on your own.')
+            # STUDENTS DONE: Sample the path parametrization 'toppra_trajectory' (instance of TOPPRA library).
+            # raise NotImplementedError('[STUDENTS DONE] Trajectory sampling not finished. You have to implement it on your own.')
             # Tips:
             #  - check documentation for TOPPRA (look for eval() function): https://hungpham2511.github.io/toppra/index.html
             #  - use 'toppra_trajectory' and the predefined sampling step 'sampling_step'
@@ -612,7 +612,7 @@ class TrajectoryUtils():
         ## |  [COLLISION AVOIDANCE METHOD #2]: Delay UAV with shorter trajectory at start until there is no collision occurring  |
         elif method == 'delay_till_no_collisions_occur':
 
-            #raise NotImplementedError('[STUDENTS TODO] Collision prevention method \'delay_till_no_collisions_occur\' not finished. You have to finish it on your own.')
+            #raise NotImplementedError('[STUDENTS DONE] Collision prevention method \'delay_till_no_collisions_occur\' not finished. You have to finish it on your own.')
             # Tips:
             #  - you might select which trajectory it is better to delay
             #  - the smallest delay step is the sampling step stored in variable 'self.dT'
@@ -622,7 +622,7 @@ class TrajectoryUtils():
             traj_lens  = [t.getLength() for t in trajectories]
 
             # Decide which UAV should be delayed
-            # [STUDENTS TODO] CHANGE BELOW
+            # [STUDENTS DONE] CHANGE BELOW
             if traj_times[0] < traj_times[1]:
                 delay_robot_idx = 0
                 nondelay_robot_idx = 1
