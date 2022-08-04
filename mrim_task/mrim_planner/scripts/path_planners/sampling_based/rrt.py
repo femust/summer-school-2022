@@ -225,17 +225,19 @@ class RRT:
         cost   = self.tree.get_cost(closest_point) + distEuclidean(closest_point, point)
 
         neighborhood_points = self.getPointsInNeighborhood(point, neighborhood)
+
         for neighbor in neighborhood_points:
 
-            raise NotImplementedError('[STUDENTS TODO] Getting node parents in RRT* not implemented. You have to finish it.')
+            # raise NotImplementedError('[STUDENTS DONE] Getting node parents in RRT* not implemented. You have to finish it.')
             # Tips:
             #  - look for neighbor which when connected yields minimal path cost all the way back to the start
             #  - you might need functions 'self.tree.get_cost()' or 'distEuclidean()'
+            candidate_cost = self.tree.get_cost(neighbor) + distEuclidean(neighbor, point)
+            if candidate_cost < cost:
+                cost = candidate_cost
+                parent = neighbor
 
-            # TODO: fill these two variables
-            cost = float('inf') 
-            parent = closest_point
-
+          
         return parent, cost
     # # #}
 
@@ -290,15 +292,16 @@ class RRT:
         if len(path) <= 2:
             return path
 
-        raise NotImplementedError('[STUDENTS TODO] RRT: path straightening is not finished. Finish it on your own.')
+        # raise NotImplementedError('[STUDENTS ALMOST DONE] RRT: path straightening is not finished. Finish it on your own.')
         # Tips:
         #  - divide the given path by a certain ratio and use this method recursively
 
         if not self.validateLinePath(pt1, pt2, check_bounds=False):
             
             # [STUDENTS TODO] Replace seg1 and seg2 variables effectively
-            seg1 = path[:1]
-            seg2 = path[1:]
+            middle_idx = len(path)//2
+            seg1 = self.halveAndTest(path[:middle_idx+1 ])
+            seg2 = self.halveAndTest(path[middle_idx:])
 
             seg1.extend(seg2)
             return seg1

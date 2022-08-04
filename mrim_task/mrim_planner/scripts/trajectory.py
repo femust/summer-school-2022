@@ -569,7 +569,8 @@ class TrajectoryUtils():
         path       = ta.SplineInterpolator(np.linspace(0, 1, len(waypoints)), wp_lists)
         pc_vel     = constraint.JointVelocityConstraint(v_lims)
         pc_acc     = constraint.JointAccelerationConstraint(a_lims)
-        instance   = algo.TOPPRA([pc_vel, pc_acc], path, parametrizer="ParametrizeConstAccel")
+        gridpoints = np.linspace(0, path.duration, 10000)  # 1000 points
+        instance   = algo.TOPPRA([pc_vel, pc_acc], path, parametrizer="ParametrizeConstAccel", gridpoints = gridpoints )
         trajectory = instance.compute_trajectory()
 
         return trajectory
